@@ -48,3 +48,33 @@ mobileNav.addEventListener("change", () => {
 });
 
 showView(window.location.hash.slice(1) || "home");
+
+const skillsSection = document.querySelector("#skills");
+const skillBars = document.querySelectorAll(".skill-bar i");
+
+const skillsObserver = new IntersectionObserver(
+    (entries, observer) => {
+        entries.forEach((entry) => {
+
+            if (entry.isIntersecting) {
+
+                skillBars.forEach((bar, index) => {
+
+                    setTimeout(() => {
+                        bar.style.width = bar.dataset.width;
+                    }, index * 100);
+
+                });
+
+                observer.unobserve(entry.target);
+            }
+        });
+    },
+    {
+        threshold: 0.25
+    }
+);
+
+if (skillsSection) {
+    skillsObserver.observe(skillsSection);
+}
