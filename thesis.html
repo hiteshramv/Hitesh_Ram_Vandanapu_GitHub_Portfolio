@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Master's thesis case study by Hitesh Ram Vandanapu: motion-model evaluation for vulnerable road user tracking using a roadside LiDAR-camera system.">
+    <title>Master's Thesis | Hitesh Ram Vandanapu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="thesis.css">
+</head>
+<body>
+
+<header class="thesis-nav">
+    <div class="thesis-container nav-inner">
+        <a class="brand" href="index.html#home" aria-label="Back to Hitesh Ram Vandanapu portfolio">
+            HR<span>V</span>
+        </a>
+        <a class="back-link" href="index.html#projects">← Back to portfolio</a>
+    </div>
+</header>
+
+<main>
+
+    <!-- ========================================
+         HERO
+    ========================================= -->
+    <section class="thesis-hero">
+        <div class="thesis-container">
+            <div class="eyebrow">MASTER'S THESIS</div>
+
+            <h1>
+                A Systematic Evaluation of Motion Models for Vulnerable Road User Tracking in a School Zone Using a Roadside LiDAR-Camera System
+            </h1>
+
+            <p class="hero-lead">
+                A real-world investigation of how motion-model selection affects 3D multi-object tracking of vulnerable road users in a roadside LiDAR-camera perception system.
+            </p>
+
+            <div class="meta-row">
+                <div>
+                    <span class="meta-label">Degree</span>
+                    <strong>Master of Science in Digital Engineering</strong>
+                </div>
+                <div>
+                    <span class="meta-label">Institution</span>
+                    <strong>Bauhaus-Universität Weimar</strong>
+                </div>
+                <div>
+                    <span class="meta-label">Submission</span>
+                    <strong>July 2026</strong>
+                </div>
+                <div>
+                    <span class="meta-label">Domain</span>
+                    <strong>Sensor Fusion · Multi-Object Tracking</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================
+         KEY RESULTS
+    ========================================= -->
+    <section class="results-strip">
+        <div class="thesis-container results-grid">
+            <div class="result-item">
+                <span class="result-value">10</span>
+                <span class="result-unit">FPS</span>
+                <span class="result-label">Tracking pipeline</span>
+            </div>
+            <div class="result-item">
+                <span class="result-value">22</span>
+                <span class="result-unit">Scenes</span>
+                <span class="result-label">Real-world evaluation</span>
+            </div>
+            <div class="result-item">
+                <span class="result-value">5,333</span>
+                <span class="result-unit">Frames</span>
+                <span class="result-label">Recorded evaluation data</span>
+            </div>
+            <div class="result-item featured-result">
+                <span class="result-value">67.04%</span>
+                <span class="result-unit">HOTA</span>
+                <span class="result-label">Best combined pedestrian result</span>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================
+         OVERVIEW
+    ========================================= -->
+    <section class="case-section">
+        <div class="thesis-container two-column">
+            <div>
+                <div class="eyebrow">THE PROBLEM</div>
+                <h2>Why does the motion model matter?</h2>
+            </div>
+
+            <div class="prose">
+                <p>
+                    Accurate tracking of vulnerable road users is important for roadside safety monitoring and intelligent transportation systems, particularly in safety-critical areas such as school zones.
+                </p>
+                <p>
+                    A roadside LiDAR-camera system provides a stable view of the environment, but the tracker still has to predict an object's state between detections. That prediction depends on the selected motion model.
+                </p>
+                <p>
+                    The thesis therefore investigates how four kinematic models affect 3D multi-object tracking performance for adults, children, cyclists, and a combined pedestrian category.
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================
+         SENSOR SETUP
+    ========================================= -->
+    <section class="case-section alt-section">
+        <div class="thesis-container">
+            <div class="section-heading">
+                <div>
+                    <div class="eyebrow">01 / SENSOR PLATFORM</div>
+                    <h2>Roadside multi-sensor system</h2>
+                    <p class="section-description">
+                        The evaluation was performed on a deployed roadside perception platform near an elementary school.
+                    </p>
+                </div>
+            </div>
+
+            <div class="image-card image-wide">
+                <img src="assets/sensor-platform.png" alt="Roadside multi-sensor platform with LiDAR and RGB cameras">
+                <div class="caption">Deployed location of the roadside multi-sensor platform.</div>
+            </div>
+
+            <div class="feature-grid three-up">
+                <div class="feature-card">
+                    <span class="feature-number">2×</span>
+                    <h3>LiDAR sensors</h3>
+                    <p>Ouster OS1 with 64 channels and inverted Ouster OSdome with 128 channels, mounted at approximately 4.5 m.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-number">3×</span>
+                    <h3>RGB cameras</h3>
+                    <p>Basler Ace 2 cameras mounted at approximately 5.5 m to cover the roadway, crossing and surrounding footpaths.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-number">10 Hz</span>
+                    <h3>Acquisition rate</h3>
+                    <p>LiDAR and camera detections were operated at 10 frames per second with hardware-triggered timing.</p>
+                </div>
+            </div>
+
+            <div class="image-card image-wide compact-image">
+                <img src="assets/mobile_mast.png" alt="Mobile mast with sensor setup">
+                <div class="caption">The mobile mast supports the deployment of multiple sensors for comprehensive perception.</div>
+            </div>
+            <p class="sensor-link">The hardware infrastructure was developed independently of this work by <a href="https://arxiv.org/html/2607.15889v1" target="_blank" rel="noopener noreferrer">Agrawal et al. (More about the sensor setup) &#8594;</a></p>
+
+        </div>
+    </section>
+
+
+    <!-- ========================================
+         DATASET
+    ========================================= -->
+    <section class="case-section">
+        <div class="thesis-container">
+            <div class="section-heading">
+                <div>
+                    <div class="eyebrow">02 / DATASET</div>
+                    <h2>Real-world school-zone data</h2>
+                </div>
+                <p>
+                    Ground truth trajectories were manually annotated on LiDAR point clouds and used as the reference for evaluation.
+                </p>
+            </div>
+
+            <div class="dataset-grid">
+                <div class="dataset-card">
+                    <strong>365</strong>
+                    <span>Unique ground-truth tracks</span>
+                </div>
+                <div class="dataset-card">
+                    <strong>196</strong>
+                    <span>Adult tracks</span>
+                </div>
+                <div class="dataset-card">
+                    <strong>153</strong>
+                    <span>Child tracks</span>
+                </div>
+                <div class="dataset-card">
+                    <strong>16</strong>
+                    <span>Cyclist tracks</span>
+                </div>
+                <div class="dataset-card">
+                    <strong>51,163</strong>
+                    <span>Annotated instances</span>
+                </div>
+            </div>
+
+            <div class="note-box">
+                <strong>Evaluation scope</strong>
+                <p>Adult and child pedestrians were analysed separately to evaluate their motion characteristics independently, while a combined pedestrian category was also included for overall evaluation.</p>
+                <p>
+                    The dataset contains 22 scenes and 5,333 frames, with an average scene duration of 24.2 seconds. Cyclists are comparatively underrepresented it is due to the natural distribution of cyclists in the real world, so cyclist-specific results should be interpreted with that smaller sample in mind.
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================
+         DETECTION FUSION
+    ========================================= -->
+    <section class="case-section alt-section">
+        <div class="thesis-container">
+            <div class="section-heading">
+                <div>
+                    <div class="eyebrow">03 / SENSOR FUSION</div>
+                    <h2>From 2D detections to enriched 3D objects</h2>
+                </div>
+                <p>
+                    Camera detections provide semantic labels while LiDAR provides the 3D spatial representation used by the tracker.
+                </p>
+            </div>
+
+            <!-- <div class="image-card image-centered">
+                <img src="assets/detection-fusion.png" alt="Detection fusion pipeline showing LiDAR projection and camera association">
+                <div class="caption">Detection-fusion pipeline. Figure 5.2.</div>
+            </div> -->
+
+            <div class="two-column-half sensor-fusion-context">
+                <div class="prose">
+                    <h3>LiDAR-based 3D object detection</h3>
+                    <p class="sensor-link2">
+                        The LiDAR-based 3D object detection pipeline is provided by the industrial partner <a href="https://www.linkedin.com/company/newsensing/posts/?feedView=all" target="_blank" rel="noopener noreferrer">NewSense</a>. This software processes the raw point cloud data from both LiDAR sensors and outputs 3D bounding box detections, including position, dimensions, and heading angle for each detected object.
+                    </p>
+                </div>
+                <div class="prose">
+                    <h3>Camera-based 2D object detection</h3>
+                    <p>
+                        Camera-based detection is performed using a YOLO11s model, which was retrained on a custom dataset to detect the three VRU classes(adults, children, and cyclists). The retrained model produces 2D bounding box detections in the image plane for each camera stream. This was done during the internship at Fraunhofer IVI.
+                    </p>
+                </div>
+            </div>
+
+            <div class="two-column-half detail-columns">
+                <div class="prose">
+                    <h3>LiDAR-camera projection</h3>
+                    <p>
+                        For each 3D LiDAR detection, the eight bounding-box corners are calculated from its centre, dimensions and yaw angle and projected into the three camera image planes using the calibrated sensor geometry.
+                    </p>
+                </div>
+                <div class="prose">
+                    <h3>Association</h3>
+                    <p>
+                        Projected 3D boxes are compared with YOLO11s camera detections using 2D Intersection over Union. The Hungarian algorithm maximises the total similarity, with the largest projected area used to select between multiple valid camera views.
+                    </p>
+                </div>
+            </div>
+
+            <div class="image-card image-wide">
+                <img src="assets/lidar-camera-association.png" alt="LiDAR-camera association showing projected LiDAR detections and YOLO detections">
+                <div class="caption">Example LiDAR-camera association: green boxes in camera images are YOLO detections, blue boxes in camera images are projected 3D LiDAR detections, and yellow arrows indicate corresponding objects.</div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================
+         TRACKING PIPELINE
+    ========================================= -->
+    <section class="case-section">
+        <div class="thesis-container">
+            <div class="section-heading">
+                <div>
+                    <div class="eyebrow">04 / TRACKING</div>
+                    <h2>Two-stage 3D multi-object tracking</h2>
+                </div>
+                <p>
+                    All four motion models were evaluated inside the same tracking framework so that the model itself remained the main variable.
+                </p>
+            </div>
+
+            <div class="image-card image-centered pipeline-image">
+                <img src="assets/tracking-pipeline.png" alt="Proposed 3D multi-object tracking pipeline">
+                <div class="caption">Proposed 3D multi-object tracking pipeline.</div>
+            </div>
+
+            <div class="pipeline-steps">
+                <article>
+                    <span>01</span>
+                    <h3>Predict</h3>
+                    <p>Previous 3D tracks are propagated using the selected Kalman-filter motion model.</p>
+                </article>
+                <article>
+                    <span>02</span>
+                    <h3>Stage 1 · 3D association</h3>
+                    <p>Fused 3D detections are associated to predicted tracks using scaled distance and Hungarian assignment.</p>
+                </article>
+                <article>
+                    <span>03</span>
+                    <h3>Stage 2 · camera fallback</h3>
+                    <p>Unmatched tracks can be kept alive using image-space IoU against unmatched camera detections.</p>
+                </article>
+                <article>
+                    <span>04</span>
+                    <h3>Track management</h3>
+                    <p>Tracks are initialised, confirmed and deleted using minimum-hit and maximum-age rules.</p>
+                </article>
+            </div>
+
+            <div class="section-heading2">
+                <p>
+                    The following four motion models were considered, as they are among the most widely used models for object tracking.
+                </p>
+            </div>
+
+            <div class="model-grid">
+                <div class="model-card">
+                    <span>CV</span>
+                    <strong>Constant Velocity</strong>
+                    <p>Linear Kalman Filter · 10-state vector</p>
+                </div>
+                <div class="model-card">
+                    <span>CA</span>
+                    <strong>Constant Acceleration</strong>
+                    <p>Linear Kalman Filter · 13-state vector</p>
+                </div>
+                <div class="model-card">
+                    <span>CTRV</span>
+                    <strong>Constant Turn Rate &amp; Velocity</strong>
+                    <p>Extended Kalman Filter · 10-state vector</p>
+                </div>
+                <div class="model-card">
+                    <span>CTRA</span>
+                    <strong>Constant Turn Rate &amp; Acceleration</strong>
+                    <p>Extended Kalman Filter · 11-state vector</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================
+         DUPLICATE SUPPRESSION
+    ========================================= -->
+    <!-- <section class="case-section alt-section">
+        <div class="thesis-container two-column">
+            <div>
+                <div class="eyebrow">05 / POST-PROCESSING</div>
+                <h2>Handling duplicate LiDAR tracks</h2>
+            </div>
+            <div class="prose">
+                <p>
+                    The LiDAR detector could produce overlapping boxes for the same physical object. To prevent these from becoming separate identities, duplicate suppression was applied to confirmed tracks after tracking.
+                </p>
+                <p>
+                    Confirmed tracks with more than 0.7 Bird's Eye View overlap were grouped using a Disjoint Set Union structure. The track with the highest number of confirmed hits was retained as the representative identity.
+                </p>
+            </div>
+        </div>
+
+        <div class="thesis-container">
+            <div class="image-card image-centered">
+                <img src="assets/duplicate-suppression.png" alt="Duplicate track suppression before and after comparison">
+                <div class="caption">Example of duplicate track suppression. Figure 5.5.</div>
+            </div>
+        </div>
+    </section> -->
+
+
+    <!-- ========================================
+         MOTION MODEL TUNING
+    ========================================= -->
+    <section class="case-section">
+        <div class="thesis-container">
+            <div class="section-heading">
+                <div>
+                    <div class="eyebrow">06 / EXPERIMENT</div>
+                    <h2>Model-specific parameter tuning</h2>
+                </div>
+                <p>
+                    Filter noise and tracker parameters were tuned before the final comparison. The same tracking pipeline was then run independently for CV, CA, CTRV and CTRA.
+                </p>
+            </div>
+
+            <div class="tuning-table-wrap">
+                <table class="tuning-table">
+                    <thead>
+                        <tr>
+                            <th>Motion model</th>
+                            <th>3D gate τ<sub>3D</sub></th>
+                            <th>Max age N<sub>max</sub></th>
+                            <th>2D IoU τ<sub>2D</sub></th>
+                            <th>Min hits N<sub>min</sub></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>CV</td><td>1.0</td><td>5</td><td>0.4</td><td>2</td></tr>
+                        <tr><td>CA</td><td>1.0</td><td>5</td><td>0.4</td><td>2</td></tr>
+                        <tr><td>CTRV</td><td>1.5</td><td>5</td><td>0.3</td><td>2</td></tr>
+                        <tr><td>CTRA</td><td>1.5</td><td>5</td><td>0.4</td><td>2</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================
+         RESULTS
+    ========================================= -->
+    <section class="case-section alt-section">
+        <div class="thesis-container">
+            <div class="section-heading">
+                <div>
+                    <div class="eyebrow">07 / RESULTS</div>
+                    <h2>What did the experiments show?</h2>
+                </div>
+                <p>
+                    The results show that greater motion-model complexity did not consistently improve tracking under the evaluated roadside sensing conditions.
+                </p>
+            </div>
+
+
+            <div class="result-highlight">
+                <div>
+                    <span class="eyebrow">OVERALL BEST BALANCE</span>
+                    <h3>Constant Velocity (CV)</h3>
+                    <p>
+                        CV achieved the strongest overall balance between tracking accuracy, localisation, identity continuity and trajectory coverage for the investigated school-crossing scenario.
+                    </p>
+                </div>
+                <div class="big-metric">
+                    <strong>67.04%</strong>
+                    <span>Combined pedestrian HOTA</span>
+                </div>
+            </div>
+
+            <div class="comparison-table-wrap">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Metric</th>
+                            <th>CV</th>
+                            <th>CA</th>
+                            <th>CTRV</th>
+                            <th>CTRA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td rowspan="2">Adults</td><td>MOTA ↑</td><td class="best">56.88</td><td>56.44</td><td>52.90</td><td>53.63</td></tr>
+                        <tr><td>HOTA ↑</td><td>65.30</td><td class="best">65.54</td><td>57.41</td><td>59.10</td></tr>
+                        <tr><td rowspan="2">Children</td><td>MOTA ↑</td><td class="best">42.52</td><td>40.82</td><td>39.16</td><td>39.78</td></tr>
+                        <tr><td>HOTA ↑</td><td class="best">39.32</td><td>39.19</td><td>31.22</td><td>32.45</td></tr>
+                        <tr><td rowspan="2">Cyclists</td><td>MOTA ↑</td><td class="best">52.67</td><td class="best">52.67</td><td>49.41</td><td>51.69</td></tr>
+                        <tr><td>HOTA ↑</td><td>48.94</td><td class="best">49.72</td><td>42.62</td><td>44.16</td></tr>
+                        <tr><td rowspan="2">Pedestrians</td><td>MOTA ↑</td><td class="best">74.07</td><td>73.14</td><td>69.33</td><td>69.96</td></tr>
+                        <tr><td>HOTA ↑</td><td class="best">67.04</td><td>66.97</td><td>56.34</td><td>58.21</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="table-note">Values are percentages. Best values within each metric row are highlighted. IDSW, fragmentation and trajectory-coverage metrics were also evaluated in the thesis.</p>
+            <div class="results-video">
+                <video controls playsinline preload="metadata">
+                    <source src="assets/results.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <p class="video-caption">* For visualization purposes, the video displays the 3D detections within a virtual representation of the environment, along with their tracking IDs and spatial positions. As the analysis focuses on vulnerable road users (VRUs), detections corresponding to vehicles are excluded from the visualization.</p>
+        
+        </div>
+    </section>
+
+
+    <!-- ========================================
+         TAKEAWAYS
+    ========================================= -->
+    <section class="case-section">
+        <div class="thesis-container">
+            <div class="section-heading">
+                <div>
+                    <div class="eyebrow">08 / TAKEAWAYS</div>
+                    <h2>What I learned from the comparison</h2>
+                </div>
+            </div>
+
+            <div class="takeaway-grid">
+                <article class="takeaway">
+                    <span>01</span>
+                    <h3>More complexity is not always better</h3>
+                    <p>CTRV and CTRA introduce additional yaw-rate and acceleration states, but neither consistently surpassed the linear models in the main pedestrian metrics.</p>
+                </article>
+                <article class="takeaway">
+                    <span>02</span>
+                    <h3>CV was the strongest overall choice</h3>
+                    <p>Its smaller state vector requires fewer motion variables to be estimated, making it less sensitive to noisy orientation measurements and short-term motion variations. This is particularly relevant for vulnerable road users, whose smaller physical dimensions can result in greater relative variation in their observed motion.</p>
+                </article>
+                <article class="takeaway">
+                    <span>03</span>
+                    <h3>CA remains a useful alternative</h3>
+                    <p>CA often reduced identity switches and can be preferable when association continuity is prioritised over the strongest overall accuracy.</p>
+                </article>
+                <article class="takeaway">
+                    <span>04</span>
+                    <h3>Real-world perception has limits</h3>
+                    <p>Missed detections, noisy boxes, class inconsistencies, occlusions and duplicate detections can affect tracking performance independently of the motion model.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================
+         LIMITATIONS / FUTURE WORK
+    ========================================= -->
+    <section class="case-section alt-section">
+        <div class="thesis-container two-column">
+            <div>
+                <div class="eyebrow">09 / LIMITATIONS</div>
+                <h2>Where would I take this next?</h2>
+            </div>
+            <div class="prose">
+                <ul class="future-list">
+                    <li>Evaluate the pipeline at different locations, including intersections and curved roads.</li>
+                    <li>Expand the region of interest to test longer trajectories and more distant objects.</li>
+                    <li>Improve LiDAR and camera detection quality to reduce missed detections, false detections and class inconsistencies.</li>
+                    <li>Evaluate robustness under rain, fog, snow, varying illumination and nighttime operation.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================
+         TECH STACK
+    ========================================= -->
+    <section class="case-section">
+        <div class="thesis-container">
+            <div class="eyebrow">TECHNICAL STACK</div>
+            <div class="tech-list">
+                <!-- <span>C++</span> -->
+                <span>Python</span>
+                <span>ROS 2</span>
+                <span>LiDAR</span>
+                <span>RGB Cameras</span>
+                <span>3D Geometry</span>
+                <span>Detection Fusion</span>
+                <span>Point Clouds</span>
+                <span>YOLO11s</span>
+                <span>Kalman Filter</span>
+                <span>Extended Kalman Filter</span>
+                <span>Hungarian Algorithm</span>
+                <span>Data Association</span>
+                <span>Multi-Object Tracking</span>
+                <span>State Estimation</span>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="thesis-footer">
+    <div class="thesis-container footer-inner">
+        <span>Hitesh Ram Vandanapu · Perception Engineer</span>
+        <a href="index.html#projects">Back to portfolio ↑</a>
+    </div>
+</footer>
+
+</body>
+</html>
