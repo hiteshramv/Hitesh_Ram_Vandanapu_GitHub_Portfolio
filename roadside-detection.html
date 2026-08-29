@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Hitesh Ram Vandanapu — Real-Time Roadside Object Detection using YOLO11s"
+    >
+
+    <title>Real-Time Roadside Object Detection | Hitesh Ram Vandanapu</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="roadside-detection.css">
+
+</head>
+
+<body>
+<header class="det-nav">
+    <div class="det-container nav-inner">
+        <a class="brand" href="index.html#home" aria-label="Back to Hitesh Ram Vandanapu portfolio">
+            HR<span>V</span>
+        </a>
+        <a class="back-link" href="index.html#projects">← Back to portfolio</a>
+    </div>
+</header>
+
+
+<main class="case-study">
+
+    <!-- HERO -->
+    <section class="case-hero">
+        <div class="container">
+
+            <div class="case-label">
+                COMPUTER VISION · OBJECT DETECTION
+            </div>
+
+            <h1>
+                Real-Time Roadside <span>Object Detection</span>
+            </h1>
+
+            <p class="case-lead">
+                Retrained and deployed a YOLO11s object-detection model for real-time roadside perception using camera data
+                collected from a real-world multi-sensor platform.
+            </p>
+
+            <div class="tags case-tags">
+                <span class="tag">YOLO11s</span>
+                <!-- <span class="tag">PyTorch</span> -->
+                <span class="tag">Python</span>
+                <span class="tag">Object Detection</span>
+                <span class="tag">Real-Time Perception</span>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- OVERVIEW -->
+    <section>
+        <div class="container case-grid">
+
+            <div>
+                <h2>Overview</h2>
+            </div>
+
+            <div class="case-content">
+                <p>
+                    During my research internship at the Fraunhofer Institute
+                    for Transport and Infrastructure Systems (IVI), I worked
+                    on camera-based object detection for a roadside perception
+                    system.
+                </p>
+
+                <p>
+                    The camera detector was based on YOLO11s. The model was
+                    retrained from a pretrained checkpoint using a custom
+                    dataset collected from the three RGB cameras of the
+                    roadside sensor platform.
+                </p>
+
+                <p>
+                    The retrained detector was designed to distinguish
+                    vulnerable road users(Adults, Children, Cyclists) while also recognizing other traffic
+                    participants present in the scene.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- DATASET -->
+    <section>
+        <div class="container">
+
+            <h2>Dataset</h2>
+
+            <p class="section-intro case-intro">
+                A custom roadside dataset was created from recordings collected
+                using all three RGB cameras of the sensor platform.
+            </p>
+
+            <div class="metric-grid">
+
+                <div class="metric">
+                    <strong>1,091</strong>
+                    <span>Images</span>
+                </div>
+
+                <div class="metric">
+                    <strong>981</strong>
+                    <span>Training images · 90%</span>
+                </div>
+
+                <div class="metric">
+                    <strong>110</strong>
+                    <span>Validation images · 10%</span>
+                </div>
+
+                <div class="metric">
+                    <strong>7,655</strong>
+                    <span>Annotated object instances</span>
+                </div>
+
+            </div>
+
+
+            <div class="dataset-layout">
+
+                <div class="dataset-table-wrap">
+                    <table class="dataset-table">
+
+                        <thead>
+                            <tr>
+                                <th>Camera</th>
+                                <th>Frames</th>
+                                <th>Adult</th>
+                                <th>Child</th>
+                                <th>Cyclist</th>
+                                <th>Motorcycle</th>
+                                <th>Car</th>
+                                <th>Van</th>
+                                <th>Truck</th>
+                                <th>Bus</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>Left</td>
+                                <td>392</td>
+                                <td>1003</td>
+                                <td>1239</td>
+                                <td>115</td>
+                                <td>22</td>
+                                <td>1007</td>
+                                <td>63</td>
+                                <td>94</td>
+                                <td>37</td>
+                            </tr>
+
+                            <tr>
+                                <td>Middle</td>
+                                <td>490</td>
+                                <td>520</td>
+                                <td>1283</td>
+                                <td>198</td>
+                                <td>19</td>
+                                <td>345</td>
+                                <td>54</td>
+                                <td>76</td>
+                                <td>18</td>
+                            </tr>
+
+                            <tr>
+                                <td>Right</td>
+                                <td>209</td>
+                                <td>391</td>
+                                <td>329</td>
+                                <td>142</td>
+                                <td>17</td>
+                                <td>552</td>
+                                <td>36</td>
+                                <td>60</td>
+                                <td>35</td>
+                            </tr>
+
+                            <tr class="table-total">
+                                <td>Total</td>
+                                <td>1,091</td>
+                                <td>1,914</td>
+                                <td>2,851</td>
+                                <td>455</td>
+                                <td>58</td>
+                                <td>1,904</td>
+                                <td>153</td>
+                                <td>230</td>
+                                <td>90</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+
+                <div class="dataset-note">
+
+                    <h3>Eight object classes</h3>
+
+                    <ul>
+                        <li>Adult</li>
+                        <li>Child</li>
+                        <li>Bicycle</li>
+                        <li>Motorcycle</li>
+                        <li>Car</li>
+                        <li>Van</li>
+                        <li>Truck</li>
+                        <li>Bus</li>
+                    </ul>
+
+                    <p>
+                        The dataset was intentionally weighted toward
+                        vulnerable road users. Adult and child instances
+                        together account for 4,765 annotated instances.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <p class="case-note">
+                <strong>Annotation:</strong>
+                Images were labelled using LabelImg with axis-aligned
+                bounding boxes. The dataset was collected from all three
+                camera perspectives to capture different views of the
+                roadside environment.
+            </p>
+
+        </div>
+    </section>
+
+
+    <!-- WHY RETRAIN -->
+    <section>
+        <div class="container case-grid">
+
+            <div>
+                <h2>Why Retrain YOLO11s?</h2>
+            </div>
+
+            <div class="case-content">
+
+                <p>
+                    The pretrained detector did not provide the class
+                    separation required for the tracking application.
+                    In particular, generic person detections could not
+                    distinguish adults from children.
+                </p>
+
+                <p>
+                    The tracking system also required a cyclist to be
+                    represented as a single object rather than treating
+                    the rider and bicycle as separate detections.
+                </p>
+
+                <div class="callout">
+                    <span class="callout-label">Target VRU classes</span>
+
+                    <div class="callout-tags">
+                        <span class="tag">Adult</span>
+                        <span class="tag">Child</span>
+                        <span class="tag">Cyclist</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- TRAINING -->
+    <section>
+        <div class="container case-grid">
+
+            <div>
+                <h2>Training</h2>
+            </div>
+
+            <div class="case-content">
+                <p>
+                    The model was trained for 120 epochs using yolo11s.pt as the initial pre
+                    trained weights, with a batch size of 16 and an input resolution of 640 × 640
+                    pixels. A cosine learning rate schedule was applied with an initial rate of 0.01.
+                    Standard Ultralytics data augmentation was used, including random horizon
+                    tal flipping, HSV colour jitter, and mosaic augmentation.
+                </p>
+
+                <!-- <p>
+                    The camera detector was based on YOLO11s. The model was
+                    retrained from a pretrained checkpoint using a custom
+                    dataset collected from the three RGB cameras of the
+                    roadside sensor platform.
+                </p>
+
+                <p>
+                    The retrained detector was designed to distinguish
+                    vulnerable road users(Adults, Children, Cyclists) while also recognizing other traffic
+                    participants present in the scene.
+                </p> -->
+            </div>
+            <!-- <div class="pipeline">
+
+                <div class="pipeline-step">
+                    <span>01</span>
+                    <strong>Pretrained YOLO11s</strong>
+                    <p>Starting checkpoint</p>
+                </div>
+
+                <div class="pipeline-arrow">→</div>
+
+                <div class="pipeline-step">
+                    <span>02</span>
+                    <strong>Custom Dataset</strong>
+                    <p>1,091 labelled images</p>
+                </div>
+
+                <div class="pipeline-arrow">→</div>
+
+                <div class="pipeline-step">
+                    <span>03</span>
+                    <strong>Retraining</strong>
+                    <p>Eight traffic classes</p>
+                </div>
+
+                <div class="pipeline-arrow">→</div>
+
+                <div class="pipeline-step">
+                    <span>04</span>
+                    <strong>Deployment</strong>
+                    <p>Roadside perception</p>
+                </div>
+
+            </div> -->
+
+            <!-- <div class="figure-card">
+                <img
+                    src="assets/yolo_training.png"
+                    alt="YOLO11s training loss curves from the thesis"
+                    loading="lazy"
+                >
+
+                <p class="figure-caption">
+                    Training and validation loss curves for the retrained YOLO11s model.
+                </p>
+            </div> -->
+
+        </div>
+    </section>
+
+
+    <!-- RESULTS VIDEO -->
+    <section>
+        <div class="container">
+
+            <h2>Detection Results</h2>
+
+            <p class="section-intro case-intro">
+                The following video demonstrates the retrained detector
+                running on roadside camera data.
+            </p>
+
+            <div class="video-container">
+
+                <!--
+                    OPTION 1:
+                    Replace the src below with your compressed MP4.
+
+                    OPTION 2:
+                    Replace the entire video element with your YouTube
+                    iframe if the video is hosted as an unlisted video.
+                -->
+
+                <video controls preload="metadata">
+                    <source
+                        src="assets/det_video.mp4"
+                        type="video/mp4"
+                    >
+                    Your browser does not support HTML5 video.
+                </video>
+
+            </div>
+
+            <p class="case-note">
+                <strong>Visualization:</strong>
+                The video shows the detector output on real roadside
+                camera data, including the detected objects and their
+                bounding boxes.
+            </p>
+
+            <!-- <div class="figure-card">
+                <img
+                    src="assets/detection_results.png"
+                    alt="Comparison of pretrained and retrained YOLO11s detections"
+                    loading="lazy"
+                >
+
+                <p class="figure-caption">
+                    Example detection results comparing the pretrained
+                    and retrained YOLO11s models.
+                </p>
+            </div> -->
+
+        </div>
+    </section>
+
+
+    <!-- RESULT -->
+    <section>
+        <div class="container">
+
+            <h2>Performance</h2>
+
+            <div class="result-highlight">
+                <strong>96.7%</strong>
+                <span>mAP@0.5</span>
+            </div>
+
+            <p class="case-content result-text">
+                The retrained YOLO11s model achieved <strong>96.7% mAP@0.5</strong> and <strong>85.8% mAP@0.5:0.95</strong> on the validation set.
+                And was subsequently deployed as the
+                camera-side detector for the roadside perception system.
+            </p>
+
+        </div>
+    </section>
+
+
+    <!-- CONNECTION
+    <section>
+        <div class="container case-grid">
+
+            <div>
+                <h2>From Detection to Tracking</h2>
+            </div>
+
+            <div class="case-content">
+
+                <p>
+                    The camera detector was not developed in isolation.
+                    Its output became an input to my subsequent Master's
+                    thesis on LiDAR-camera multi-object tracking.
+                </p>
+
+                <div class="connection-flow">
+
+                    <div>
+                        <span>Internship</span>
+                        <strong>YOLO11s Retraining</strong>
+                    </div>
+
+                    <span class="flow-arrow">↓</span>
+
+                    <div>
+                        <span>Camera Input</span>
+                        <strong>2D VRU Detections</strong>
+                    </div>
+
+                    <span class="flow-arrow">↓</span>
+
+                    <div>
+                        <span>Master's Thesis</span>
+                        <strong>LiDAR + Camera Tracking</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section> -->
+
+
+    <!-- TECHNOLOGIES -->
+    <section>
+        <div class="container">
+
+            <h2>Technologies</h2>
+
+            <div class="tags technology-tags">
+                <span class="tag">Python</span>
+                <!-- <span class="tag">PyTorch</span> -->
+                <span class="tag">YOLO11s</span>
+                <span class="tag">Computer Vision</span>
+                <span class="tag">Object Detection</span>
+                <span class="tag">Image Annotation</span>
+                <span class="tag">Real-Time Inference</span>
+                <span class="tag">Roadside Perception</span>
+            </div>
+
+        </div>
+    </section>
+
+
+</main>
+
+
+<!-- <footer class="thesis-footer">
+    <div class="thesis-container footer-inner">
+        <span>Hitesh Ram Vandanapu · Perception Engineer</span>
+        <a href="index.html#projects">Back to portfolio ↑</a>
+    </div>
+</footer> -->
+
+</body>
+</html>
