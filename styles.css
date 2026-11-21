@@ -918,6 +918,11 @@ section.page-hidden {
 
 }
 
+.contact-github {
+    display: inline-block;
+    transform: translateY(100px);
+}
+
 .contact-form {
     display: flex;
     flex-direction: column;
@@ -1104,6 +1109,7 @@ footer.footer-hidden {
     .contact-detail,
     .contact-cv,
     .contact-linkedin,
+   .contact-github,
     .contact-form {
         transform: none;
     }
