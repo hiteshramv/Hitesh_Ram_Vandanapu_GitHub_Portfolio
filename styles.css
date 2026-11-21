@@ -1109,7 +1109,7 @@ footer.footer-hidden {
     .contact-detail,
     .contact-cv,
     .contact-linkedin,
-   .contact-github,
+    .contact-github,
     .contact-form {
         transform: none;
     }
