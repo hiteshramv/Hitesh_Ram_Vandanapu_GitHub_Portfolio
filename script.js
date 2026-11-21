@@ -1,4 +1,4 @@
-const roles=["Perception Engineer","Sensor Fusion Engineer","Computer Vision Engineer"];
+const roles=["Computer Vision Engineer","Machine Learning Engineer","Perception Engineer","Sensor Fusion Engineer",];
 const el=document.getElementById("typed");
 let r=0,i=0,deleting=false;
 function type(){
